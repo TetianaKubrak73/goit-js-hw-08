@@ -1,15 +1,27 @@
-{/* <iframe src="https://player.vimeo.com/video/76979871?h=8272103f6e" width="640" height="360" frameborder="0" allowfullscreen allow="autoplay; encrypted-media"></iframe> */}
+import Player from '@vimeo/player';
+    // const iframe = document.querySelector('iframe');
+    const player = new Player('vimeo-player');
+    
+function saveCurrentTime() {
+  player.getCurrentTime().then((time) => {
+    localStorage.setItem('videoplayer-current-time', time);
+  });
+}
+function restoreCurrentTime() {
+  const currentTime = localStorage.getItem('videoplayer-current-time');
+  if (currentTime) {
+    player.setCurrentTime(parseFloat(currentTime));
+  }
+}
 
-{/* <script src="https://player.vimeo.com/api/player.js"></script>
-<script> */}
-    const iframe = document.querySelector('iframe');
-    const player = new Vimeo.Player(iframe);
+player.on('play', () => {
+  
+  saveCurrentTime();
+});
 
-    player.on('play', function() {
-        console.log('played the video!');
-    });
+player.on('ended', () => {
+  
+  localStorage.removeItem('videoplayer-current-time');
+});
 
-    player.getVideoTitle().then(function(title) {
-        console.log('title:', title);
-    });
-// </script>
+restoreCurrentTime();
