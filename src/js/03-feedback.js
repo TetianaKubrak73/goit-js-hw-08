@@ -31,11 +31,12 @@ feedbackForm.addEventListener('submit', (event) => {
         alert('Будь ласка, заповніть усі поля форми');
         return;
     }
-
   localStorage.removeItem('feedback-form-state'); 
   console.log('Form submitted with data:');
   console.log({
     email: emailInput.value,
     message: messageTextarea.value,
   });
+  messageTextarea.value = '';
+  emailInput.value = '';
 });

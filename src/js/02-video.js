@@ -1,5 +1,5 @@
 import Player from '@vimeo/player';
-    // const iframe = document.querySelector('iframe');
+    const iframe = document.querySelector('iframe');
     const player = new Player('vimeo-player');
     
 function saveCurrentTime() {
