@@ -22,8 +22,12 @@ function loadFormData() {
 loadFormData();
 
 const throttledSaveFormData = throttle(saveFormData, 500);
-emailInput.addEventListener('input', throttledSaveFormData);
-messageTextarea.addEventListener('input', throttledSaveFormData);
+
+
+feedbackForm.addEventListener('input', (event) => {
+  saveFormData();
+});
+  
 
 feedbackForm.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -40,3 +44,6 @@ feedbackForm.addEventListener('submit', (event) => {
   messageTextarea.value = '';
   emailInput.value = '';
 });
+
+
+
